@@ -1,3 +1,7 @@
+"""
+Implementation of Binary Search Tree.
+"""
+
 class BSTreeNode:
     def __init__(self, value):
         self.value = value
@@ -12,25 +16,40 @@ class BSTreeNode:
         return self.value < other.value
 
 class BSTree:
+    """
+    BST
+    """
     def __init__(self):
         self.root = None
 
-    def insert(self, node):
+    def insert(self, node: BSTreeNode):
+        """
+        insert a node to the tree
+        """
         if self.root is None:
             self.root = node
         else:
             self.insertNode(self.root, node)
 
     def print_tree(self, indent=0):
+        """
+        print the tree
+        """
         BSTree.print_subtree(self.root)
 
     def print_subtree(node: BSTreeNode, indent=0):
+        """
+        class method for printing tree
+        """
         if node is not None:
             print(indent*' ' + str(node.value))
             BSTree.print_subtree(node.left, indent+2)
             BSTree.print_subtree(node.right, indent+2)
             
     def insertNum(self, num):
+        """
+        inserting element to the tree. creates a new node
+        """
         self.insert(BSTreeNode(num))
             
     def insertNode(self, root: BSTreeNode, new: BSTreeNode):
@@ -48,6 +67,9 @@ class BSTree:
                 self.insertNode(root.left, new)
 
     def find(self, num):
+        """
+        find node that contains the given value
+        """
         curr = self.root
         while True:
             if curr.value == num:
@@ -63,7 +85,10 @@ class BSTree:
                 else:
                     curr = curr.left
 
-    def delete(self, node):
+    def delete(self, node: BSTreeNode):
+        """
+        delete existing node
+        """
         if self.root == node:
             self.root = None
             return
@@ -72,6 +97,9 @@ class BSTree:
         previous = None
         
         while True:
+            if curr is None:
+                raise Error('Not found!')
+            
             if curr < node:
                 previous = curr
                 curr = curr.right
