@@ -7,11 +7,10 @@ class BSTreeNode:
         self.value = value
         self.left = None
         self.right = None
-        
 
     def __eq__(self, other):
         return self.value == other.value
-        
+
     def __lt__(self, other):
         return self.value < other.value
 
@@ -29,42 +28,42 @@ class BSTree:
         if self.root is None:
             self.root = node
         else:
-            self.insertNode(self.root, node)
+            self.insert_node(self.root, node)
 
-    def print_tree(self, indent=0):
+    def print_tree(self):
         """
         print the tree
         """
-        BSTree.print_subtree(self.root)
+        self.print_subtree(self.root)
 
-    def print_subtree(node: BSTreeNode, indent=0):
+    def print_subtree(self, node: BSTreeNode, indent=0):
         """
         class method for printing tree
         """
         if node is not None:
             print(indent*' ' + str(node.value))
-            BSTree.print_subtree(node.left, indent+2)
-            BSTree.print_subtree(node.right, indent+2)
+            self.print_subtree(node.left, indent+2)
+            self.print_subtree(node.right, indent+2)
             
-    def insertNum(self, num):
+    def insert_num(self, num):
         """
         inserting element to the tree. creates a new node
         """
         self.insert(BSTreeNode(num))
             
-    def insertNode(self, root: BSTreeNode, new: BSTreeNode):
+    def insert_node(self, root: BSTreeNode, new: BSTreeNode):
         if root < new:
             if root.right is None:
                 root.right = new
                 new.previous = root
             else:
-                self.insertNode(root.right, new)
+                self.insert_node(root.right, new)
         else: # new > old, assuming no equal
             if root.left is None:
                 root.left = new
                 new.previous = root
             else:
-                self.insertNode(root.left, new)
+                self.insert_node(root.left, new)
 
     def find(self, num):
         """
@@ -141,12 +140,14 @@ def find_last_left(node):
         else:
             previous = curr
             curr = curr.left
-                    
-t = BSTree()
-t.insertNum(1)
-t.insertNum(2)
-t.print_tree()
-node = t.find(2)
-print(node.value)
-t.delete(node)
-t.print_tree()
+
+
+if __name__ == '__main__':
+    t = BSTree()
+    t.insert_num(1)
+    t.insert_num(2)
+    t.print_tree()
+    x = t.find(2)
+    print(x.value)
+    t.delete(x)
+    t.print_tree()
