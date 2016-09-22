@@ -4,9 +4,9 @@ Implementation of Binary Search Tree.
 
 class BSTreeNode:
     def __init__(self, value):
-        self.value = value
-        self.left = None
-        self.right = None
+        self._value = value
+        self._left = None
+        self._right = None
 
     def __eq__(self, other):
         return self.value == other.value
@@ -14,6 +14,32 @@ class BSTreeNode:
     def __lt__(self, other):
         return self.value < other.value
 
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        self._value = value
+
+    @property
+    def left(self):
+        return self._left
+
+    @left.setter
+    def left(self, value):
+        self._left = value
+
+    @property
+    def right(self):
+        return self._right
+
+    @right.setter
+    def right(self, value):
+        self._right = value
+    
+
+    
 class BSTree:
     """
     BST
